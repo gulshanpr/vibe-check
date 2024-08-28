@@ -1,10 +1,10 @@
 import React from 'react'
-import DragDropUpload from './upload';
+import DragDropUpload from './upload'
 
 const MainHomePage = () => {
   return (
     <div>
-      <DragDropUpload />
+      <DragDropUpload/>
     </div>
   )
 }
