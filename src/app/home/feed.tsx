@@ -6,6 +6,8 @@ import {
     CardContent,
     CardHeader,
 } from "@/components/ui/card"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSun, faFire } from '@fortawesome/free-solid-svg-icons'
 
 
 const FeedCard = () => {
@@ -23,7 +25,7 @@ const FeedCard = () => {
 
     return (
         <div className="mt-28 flex justify-center">
-            <div className="w-[350px] relative">
+            <div className="w-[550px] relative">
                 {ipfsHashes.map((hash, index) => (
                     <TinderCard
                         key={index}
@@ -37,6 +39,10 @@ const FeedCard = () => {
                                     src={`https://${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${hash}`}
                                     alt={`Image from IPFS hash ${hash}`}
                                 />
+                                <div className=''>
+                                    <FontAwesomeIcon icon={faSun} className='h-8' />
+                                    <FontAwesomeIcon icon={faFire} className='h-8' />
+                                </div>
                             </CardContent>
                         </Card>
                     </TinderCard>
