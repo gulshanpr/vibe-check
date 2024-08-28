@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@prisma/client": "^5.19.0",
+    "@radix-ui/react-label": "^2.1.0",
+    "@react-spring/web": "^9.5.5",
     "@web3auth/base": "^8.12.4",
     "@web3auth/ethereum-provider": "^8.12.4",
     "@web3auth/modal": "^8.12.4",

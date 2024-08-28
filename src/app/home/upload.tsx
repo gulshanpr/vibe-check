@@ -71,9 +71,8 @@ const DragDropUpload: React.FC = () => {
   return (
     <div className="justify-center items-center h-screen w-full max-w-md mx-auto">
       <div
-        className={`border-2 border-dashed p-8 text-center cursor-pointer transition-colors ${
-          isDragging ? 'border-gray-400 bg-gray-100' : 'border-gray-300'
-        } ${uploaded ? 'opacity-50 cursor-not-allowed' : ''}`}
+        className={`border-2 border-dashed p-8 text-center cursor-pointer transition-colors ${isDragging ? 'border-gray-400 bg-gray-100' : 'border-gray-300'
+          } ${uploaded ? 'opacity-50 cursor-not-allowed' : ''}`}
         onDragEnter={handleDragIn}
         onDragLeave={handleDragOut}
         onDragOver={handleDrag}
@@ -91,8 +90,8 @@ const DragDropUpload: React.FC = () => {
           {uploaded
             ? 'File uploaded'
             : isDragging
-            ? 'Drop file here'
-            : 'Drag & Drop file here or click to select'}
+              ? 'Drop file here'
+              : 'Drag & Drop file here or click to select'}
         </p>
       </div>
       {file && (
@@ -127,7 +126,7 @@ const DragDropUpload: React.FC = () => {
               </>
             )}
           </div>
-          // this part of showing the cid on frontend. (working)
+          {/* // this part of showing the cid on frontend. (working) */}
           {/* <div>
             {uploaded && (
               <div className="flex items-center space-x-4 bg-gray-100 p-2 rounded">
@@ -136,6 +135,13 @@ const DragDropUpload: React.FC = () => {
               </div>
             )}
           </div> */}
+          {/* // this part of code fetch the image from ipfs and display it on frontend. (working)
+          {cid && (
+            <img
+              src={`https://${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${cid}`}
+              alt="Image from IPFS"
+            />
+          )} */}
         </div>
       )}
     </div>
