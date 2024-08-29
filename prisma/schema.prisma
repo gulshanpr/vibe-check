@@ -12,6 +12,7 @@ model User {
   veriferId String    @unique
   email     String    @unique
   name      String?
+  address   String    @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 }
