@@ -25,7 +25,7 @@ importers:
         version: 5.19.0(prisma@5.19.0)
       '@radix-ui/react-label':
         specifier: ^2.1.0
-        version: 2.1.0(@types/react-dom@18.3.0)(@types/react@18.3.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 2.1.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-spring/web':
         specifier: ^9.5.5
         version: 9.7.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -40,13 +40,16 @@ importers:
         version: 8.12.7(@babel/runtime@7.25.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@web3auth/modal-react-hooks':
         specifier: ^8.12.6
-        version: 8.12.7(@babel/runtime@7.25.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 8.13.0(@babel/runtime@7.25.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@web3auth/wallet-services-plugin':
         specifier: ^8.12.4
         version: 8.12.5(@babel/runtime@7.25.6)(@web3auth/openlogin-adapter@8.12.4(@babel/runtime@7.25.6))
       '@xmtp/react-sdk':
         specifier: ^8.0.1
-        version: 8.0.1(@types/react@18.3.4)(@xmtp/content-type-primitives@1.0.1)(@xmtp/content-type-reaction@1.1.9)(@xmtp/content-type-remote-attachment@1.1.9(typescript@5.5.4)(zod@3.23.8))(@xmtp/content-type-reply@1.1.11)(@xmtp/xmtp-js@12.1.0(typescript@5.5.4)(zod@3.23.8))(react@18.3.1)
+        version: 8.0.1(@types/react@18.3.5)(@xmtp/content-type-primitives@1.0.1)(@xmtp/content-type-reaction@1.1.9)(@xmtp/content-type-remote-attachment@1.1.9(typescript@5.5.4)(zod@3.23.8))(@xmtp/content-type-reply@1.1.11)(@xmtp/xmtp-js@12.1.0(typescript@5.5.4)(zod@3.23.8))(react@18.3.1)
+      '@xmtp/user-preferences-bindings-wasm':
+        specifier: 0.3.5
+        version: 0.3.5
       '@xmtp/xmtp-js':
         specifier: ^12.1.0
         version: 12.1.0(typescript@5.5.4)(zod@3.23.8)
@@ -101,7 +104,7 @@ importers:
         version: 20.16.2
       '@types/react':
         specifier: ^18
-        version: 18.3.4
+        version: 18.3.5
       '@types/react-dom':
         specifier: ^18
         version: 18.3.0
@@ -339,8 +342,8 @@ packages:
     resolution: {integrity: sha512-I6bkduevXb72TIM9q2LRO63JSsF9EXduh3sBr9oybNX2hNNpr/j1tEjXrsG0Uabm4MJ1xkGAQEMwifvKZIkyxQ==}
     engines: {node: '>=16.0.0'}
 
-  '@metamask/utils@9.2.0':
-    resolution: {integrity: sha512-01riKC6oc6YJVJBL6g6TgCBwcmzwuVSIIMhnwvWanPWs3ZpUabJzy3GR9PlsBPa2pHd1p0Q6WMVRExWWEHzsQA==}
+  '@metamask/utils@9.2.1':
+    resolution: {integrity: sha512-/u663aUaB6+Xe75i3Mt/1cCljm41HDYIsna5oBrwGvgkY2zH7/9k9Zjd706cxoAbxN7QgLSVAReUiGnuxCuXrQ==}
     engines: {node: '>=16.0.0'}
 
   '@multiformats/dns@1.0.6':
@@ -696,8 +699,8 @@ packages:
   '@types/react-dom@18.3.0':
     resolution: {integrity: sha512-EhwApuTmMBmXuFOikhQLIBUn6uFg81SwLMOAUgodJF14SOBOCMdU04gDoYi0WOJJHD144TL32z4yDqCW3dnkQg==}
 
-  '@types/react@18.3.4':
-    resolution: {integrity: sha512-J7W30FTdfCxDDjmfRM+/JqLHBIyl7xUIp9kwK637FGmY7+mkSFSe6L4jpZzhj5QMfLssSDP4/i75AKkrdC7/Jw==}
+  '@types/react@18.3.5':
+    resolution: {integrity: sha512-WeqMfGJLGuLCqHGYRGHxnKrXcTitc6L/nBUWfWPcTarG3t9PsquqUMuVeXZeca+mglY4Vo5GZjCi0A3Or2lnxA==}
 
   '@types/secp256k1@4.0.6':
     resolution: {integrity: sha512-hHxJU6PAEUn0TP4S/ZOzuTUvJWuZ6eIKeNKb5RBpODvSl6hp1Wrw4s7ATY50rklRCScUDpHzVA/DQdSjJ3UoYQ==}
@@ -720,8 +723,8 @@ packages:
     peerDependencies:
       '@babel/runtime': 7.x
 
-  '@web3auth/modal-react-hooks@8.12.7':
-    resolution: {integrity: sha512-N9l6TJTViVMqC7kRxYrZmTGiyI0iVUIDodo8/JfhagTq938T1jb7VKhdxtRmZo7IcJ4Fwt/j4A02Q68idMKWew==}
+  '@web3auth/modal-react-hooks@8.13.0':
+    resolution: {integrity: sha512-SZ3QGoZ+qcLFSUnr9uhRKIU8CyTPWunnJryXOauuAwFNfhDdhsDBWLARqoel96GChdkkp3rOgTFOk6X0xmIgYA==}
     engines: {node: '>=18.x', npm: '>=9.x'}
     peerDependencies:
       '@babel/runtime': ^7.x
@@ -813,6 +816,9 @@ packages:
       '@xmtp/content-type-reply': ^1.1.9
       '@xmtp/xmtp-js': ^12.1.0
       react: ^16.14.0 || ^17 || ^18
+
+  '@xmtp/user-preferences-bindings-wasm@0.3.5':
+    resolution: {integrity: sha512-6zfUbjEs7yRwPkYUo9JjxcI3AGg8HIGvb+2DiLgZU+dDj3BTKoL+N3+oXA649zH2PF5k+EJ8kCz2n9uuJwT7mA==}
 
   '@xmtp/user-preferences-bindings-wasm@0.3.6':
     resolution: {integrity: sha512-ANi6ikrO6YBaK978sMuEEnpREvFQQnMVaNdlviaLzmc07u4Of4s/VLNnavl4qTb4F4cvwSiBWou0wSYIE5SWYg==}
@@ -2587,7 +2593,7 @@ snapshots:
   '@metamask/abi-utils@2.0.4':
     dependencies:
       '@metamask/superstruct': 3.1.0
-      '@metamask/utils': 9.2.0
+      '@metamask/utils': 9.2.1
     transitivePeerDependencies:
       - supports-color
 
@@ -2618,7 +2624,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@metamask/utils@9.2.0':
+  '@metamask/utils@9.2.1':
     dependencies:
       '@ethereumjs/tx': 4.2.0
       '@metamask/superstruct': 3.1.0
@@ -2762,36 +2768,36 @@ snapshots:
 
   '@protobufjs/utf8@1.1.0': {}
 
-  '@radix-ui/react-compose-refs@1.1.0(@types/react@18.3.4)(react@18.3.1)':
+  '@radix-ui/react-compose-refs@1.1.0(@types/react@18.3.5)(react@18.3.1)':
     dependencies:
       react: 18.3.1
     optionalDependencies:
-      '@types/react': 18.3.4
+      '@types/react': 18.3.5
 
-  '@radix-ui/react-label@2.1.0(@types/react-dom@18.3.0)(@types/react@18.3.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@radix-ui/react-label@2.1.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@radix-ui/react-primitive': 2.0.0(@types/react-dom@18.3.0)(@types/react@18.3.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@radix-ui/react-primitive': 2.0.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     optionalDependencies:
-      '@types/react': 18.3.4
+      '@types/react': 18.3.5
       '@types/react-dom': 18.3.0
 
-  '@radix-ui/react-primitive@2.0.0(@types/react-dom@18.3.0)(@types/react@18.3.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@radix-ui/react-primitive@2.0.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@radix-ui/react-slot': 1.1.0(@types/react@18.3.4)(react@18.3.1)
+      '@radix-ui/react-slot': 1.1.0(@types/react@18.3.5)(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     optionalDependencies:
-      '@types/react': 18.3.4
+      '@types/react': 18.3.5
       '@types/react-dom': 18.3.0
 
-  '@radix-ui/react-slot@1.1.0(@types/react@18.3.4)(react@18.3.1)':
+  '@radix-ui/react-slot@1.1.0(@types/react@18.3.5)(react@18.3.1)':
     dependencies:
-      '@radix-ui/react-compose-refs': 1.1.0(@types/react@18.3.4)(react@18.3.1)
+      '@radix-ui/react-compose-refs': 1.1.0(@types/react@18.3.5)(react@18.3.1)
       react: 18.3.1
     optionalDependencies:
-      '@types/react': 18.3.4
+      '@types/react': 18.3.5
 
   '@react-spring/animated@9.7.4(react@18.3.1)':
     dependencies:
@@ -3037,9 +3043,9 @@ snapshots:
 
   '@types/react-dom@18.3.0':
     dependencies:
-      '@types/react': 18.3.4
+      '@types/react': 18.3.5
 
-  '@types/react@18.3.4':
+  '@types/react@18.3.5':
     dependencies:
       '@types/prop-types': 15.7.12
       csstype: 3.1.3
@@ -3100,7 +3106,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@web3auth/modal-react-hooks@8.12.7(@babel/runtime@7.25.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@web3auth/modal-react-hooks@8.13.0(@babel/runtime@7.25.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.25.6
       '@web3auth/base': 8.12.4(@babel/runtime@7.25.6)
@@ -3279,7 +3285,7 @@ snapshots:
       rxjs: 7.8.1
       undici: 5.28.4
 
-  '@xmtp/react-sdk@8.0.1(@types/react@18.3.4)(@xmtp/content-type-primitives@1.0.1)(@xmtp/content-type-reaction@1.1.9)(@xmtp/content-type-remote-attachment@1.1.9(typescript@5.5.4)(zod@3.23.8))(@xmtp/content-type-reply@1.1.11)(@xmtp/xmtp-js@12.1.0(typescript@5.5.4)(zod@3.23.8))(react@18.3.1)':
+  '@xmtp/react-sdk@8.0.1(@types/react@18.3.5)(@xmtp/content-type-primitives@1.0.1)(@xmtp/content-type-reaction@1.1.9)(@xmtp/content-type-remote-attachment@1.1.9(typescript@5.5.4)(zod@3.23.8))(@xmtp/content-type-reply@1.1.11)(@xmtp/xmtp-js@12.1.0(typescript@5.5.4)(zod@3.23.8))(react@18.3.1)':
     dependencies:
       '@xmtp/content-type-primitives': 1.0.1
       '@xmtp/content-type-reaction': 1.1.9
@@ -3290,12 +3296,14 @@ snapshots:
       async-mutex: 0.5.0
       date-fns: 3.6.0
       dexie: 4.0.8
-      dexie-react-hooks: 1.1.7(@types/react@18.3.4)(dexie@4.0.8)(react@18.3.1)
+      dexie-react-hooks: 1.1.7(@types/react@18.3.5)(dexie@4.0.8)(react@18.3.1)
       react: 18.3.1
       uuid: 10.0.0
       zod: 3.23.8
     transitivePeerDependencies:
       - '@types/react'
+
+  '@xmtp/user-preferences-bindings-wasm@0.3.5': {}
 
   '@xmtp/user-preferences-bindings-wasm@0.3.6': {}
 
@@ -3584,9 +3592,9 @@ snapshots:
       has-property-descriptors: 1.0.2
       object-keys: 1.1.1
 
-  dexie-react-hooks@1.1.7(@types/react@18.3.4)(dexie@4.0.8)(react@18.3.1):
+  dexie-react-hooks@1.1.7(@types/react@18.3.5)(dexie@4.0.8)(react@18.3.1):
     dependencies:
-      '@types/react': 18.3.4
+      '@types/react': 18.3.5
       dexie: 4.0.8
       react: 18.3.1
 

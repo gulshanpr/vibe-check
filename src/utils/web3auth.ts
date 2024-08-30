@@ -1,5 +1,5 @@
 'use client'
-import { CHAIN_NAMESPACES, IProvider, WEB3AUTH_NETWORK } from "@web3auth/base";
+import { CHAIN_NAMESPACES, IProvider, UserAuthInfo, WEB3AUTH_NETWORK } from "@web3auth/base";
 import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
 import { Web3Auth } from "@web3auth/modal";
 
@@ -30,7 +30,7 @@ export async function initializeWeb3Auth() {
     try {
         await web3auth.initModal();
         if(web3auth.connected) {
-            localStorage.setItem('jwtToken', web3auth.authenticateUser());
+            // localStorage.setItem('jwtToken', web3auth.authenticateUser());
             console.log('User authenticated');
         }
     } catch (error) {

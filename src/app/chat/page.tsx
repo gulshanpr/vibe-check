@@ -1,21 +1,28 @@
-'use client'
+'use client';
+
 import React, { useEffect, useRef, useState } from 'react';
 import { initializeWeb3Auth, web3auth } from '@/utils/web3auth';
-import { Client } from "@xmtp/xmtp-js";
+import { Client, Conversation, DecodedMessage } from '@xmtp/xmtp-js';
 import { ethers, Signer } from 'ethers';
+import { IProvider } from '@web3auth/base';
+
+interface TempMessage extends Omit<DecodedMessage, 'id'> {
+  isTemporary: boolean;
+}
 
 const XMTPChat = () => {
-  const [isConnected, setIsConnected] = useState(false);
-  const [address, setAddress] = useState('');
-  const [signer, setSigner] = useState(null);
-  const [isXmtpInitialized, setIsXmtpInitialized] = useState(false);
-  const [messages, setMessages] = useState({});
-  const [newMessage, setNewMessage] = useState('');
-  const [peerAddress, setPeerAddress] = useState('');
-  const [currentPeerAddress, setCurrentPeerAddress] = useState('');
-  const [conversations, setConversations] = useState([]);
-  const clientRef = useRef(null);
-  const conversationRef = useRef(null);
+  const [isConnected, setIsConnected] = useState<boolean>(false);
+  const [address, setAddress] = useState<string>('');
+  const [signer, setSigner] = useState<Signer | null>(null);
+  const [isXmtpInitialized, setIsXmtpInitialized] = useState<boolean>(false);
+  const [messages, setMessages] = useState<{ [peerAddress: string]: (DecodedMessage | TempMessage)[] }>({});
+  const [newMessage, setNewMessage] = useState<string>('');
+  const [peerAddress, setPeerAddress] = useState<string>('');
+  const [currentPeerAddress, setCurrentPeerAddress] = useState<string>('');
+  const [conversations, setConversations] = useState<Conversation[]>([]);
+  const clientRef = useRef<Client | null>(null);
+  const conversationRef = useRef<Conversation | null>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     initializeWeb3Auth();
@@ -33,10 +40,22 @@ const XMTPChat = () => {
     }
   }, [isXmtpInitialized]);
 
+  useEffect(() => {
+    if (isXmtpInitialized) {
+      conversations.forEach((conversation) => {
+        listenForMessages(conversation);
+      });
+    }
+  }, [conversations]);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   const connectWallet = async () => {
     try {
       if (web3auth.connected) {
-        const provider = new ethers.providers.Web3Provider(web3auth.provider);
+        const provider = new ethers.providers.Web3Provider(web3auth.provider as IProvider);
         const signer = provider.getSigner();
         setSigner(signer);
         const address = await signer.getAddress();
@@ -56,7 +75,7 @@ const XMTPChat = () => {
       return;
     }
     try {
-      const xmtp = await Client.create(signer, { env: "dev" });
+      const xmtp = await Client.create(signer, { env: 'dev' });
       clientRef.current = xmtp;
       setIsXmtpInitialized(true);
       loadConversations();
@@ -67,17 +86,19 @@ const XMTPChat = () => {
 
   const loadConversations = async () => {
     try {
-      const convos = await clientRef.current.conversations.list();
-      setConversations(convos);
-      for (const conversation of convos) {
-        const msgs = await conversation.messages({
-          startTime: new Date(new Date().setDate(new Date().getDate() - 30)), // Last 30 days
-          endTime: new Date(),
-        });
-        setMessages(prev => ({
-          ...prev,
-          [conversation.peerAddress]: msgs
-        }));
+      if (clientRef.current) {
+        const convos = await clientRef.current.conversations.list();
+        setConversations(convos);
+        for (const conversation of convos) {
+          const msgs = await conversation.messages({
+            startTime: new Date(new Date().setDate(new Date().getDate() - 30)), // Last 30 days
+            endTime: new Date(),
+          });
+          setMessages((prev) => ({
+            ...prev,
+            [conversation.peerAddress]: msgs,
+          }));
+        }
       }
     } catch (error) {
       console.log('Error loading conversations:', error);
@@ -86,20 +107,25 @@ const XMTPChat = () => {
 
   const listenForNewConversations = async () => {
     try {
-      const stream = await clientRef.current.conversations.stream();
-      for await (const conversation of stream) {
-        console.log(`New conversation started with ${conversation.peerAddress}`);
-        setConversations(prev => [...prev, conversation]);
-        listenForMessages(conversation);
+      if (clientRef.current) {
+        const stream = await clientRef.current.conversations.stream();
+        for await (const conversation of stream) {
+          console.log(`New conversation started with ${conversation.peerAddress}`);
+          setConversations((prev) => [...prev, conversation]);
+          listenForMessages(conversation);
+        }
       }
     } catch (error) {
       console.log('Error listening for new conversations:', error);
     }
   };
 
-  const listenForMessages = async (conversation) => {
+  const listenForMessages = async (conversation: Conversation) => {
     try {
-      for await (const message of await conversation.streamMessages()) {
+      console.log(`Listening for messages in conversation with ${conversation.peerAddress}`);
+      const stream = await conversation.streamMessages();
+      for await (const message of stream) {
+        console.log(`Received message: ${message.content} from ${message.senderAddress}`);
         setMessages(prev => ({
           ...prev,
           [conversation.peerAddress]: [...(prev[conversation.peerAddress] || []), message]
@@ -120,7 +146,7 @@ const XMTPChat = () => {
         const conversation = await clientRef.current.conversations.newConversation(peerAddress);
         conversationRef.current = conversation;
         setCurrentPeerAddress(peerAddress);
-        setConversations(prev => [...prev, conversation]);
+        setConversations((prev) => [...prev, conversation]);
         listenForMessages(conversation);
       } else {
         console.log("Can't message because the user is not on the network.");
@@ -141,9 +167,17 @@ const XMTPChat = () => {
     }
   };
 
-  const handleKeyPress = (e) => {
+
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       sendMessage();
+    }
+  };
+
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   };
 
@@ -160,9 +194,10 @@ const XMTPChat = () => {
           <div className="w-1/3 pr-4">
             <h2 className="text-xl font-bold mb-4">Conversations</h2>
             {conversations.map((conv, index) => (
-              <div 
-                key={index} 
-                className={`p-2 mb-2 cursor-pointer ${conv.peerAddress === currentPeerAddress ? 'bg-blue-100' : 'bg-gray-100'}`}
+              <div
+                key={index}
+                className={`p-2 mb-2 cursor-pointer ${conv.peerAddress === currentPeerAddress ? 'bg-blue-100' : 'bg-gray-100'
+                  }`}
                 onClick={() => {
                   setCurrentPeerAddress(conv.peerAddress);
                   conversationRef.current = conv;
@@ -179,7 +214,10 @@ const XMTPChat = () => {
                 className="w-full border rounded px-4 py-2"
                 placeholder="Enter new peer address"
               />
-              <button onClick={startNewConversation} className="mt-2 bg-purple-500 text-white px-4 py-2 rounded w-full">
+              <button
+                onClick={startNewConversation}
+                className="mt-2 bg-purple-500 text-white px-4 py-2 rounded w-full"
+              >
                 Start New Chat
               </button>
             </div>
@@ -188,28 +226,35 @@ const XMTPChat = () => {
             {currentPeerAddress && (
               <>
                 <h2 className="text-xl font-bold mb-4">Chat with {currentPeerAddress}</h2>
-                <div className="bg-gray-100 p-4 rounded-lg mb-4 h-96 overflow-y-auto">
+                <div ref={chatContainerRef} className="bg-gray-100 p-4 rounded-lg mb-4 h-96 overflow-y-auto">
                   {messages[currentPeerAddress]?.map((msg, index) => (
-                    <div key={index} className={`mb-2 ${msg.senderAddress === address ? 'text-right' : 'text-left'}`}>
-                      <span className={`inline-block p-2 rounded ${msg.senderAddress === address ? 'bg-blue-200' : 'bg-gray-200'}`}>
+                    <div
+                      key={index}
+                      className={`mb-2 ${msg.senderAddress === address ? 'text-right' : 'text-left'}`}
+                    >
+                      <span
+                        className={`inline-block p-2 rounded ${msg.senderAddress === address ? 'bg-blue-200' : 'bg-gray-200'
+                          }`}
+                      >
                         {msg.content}
                       </span>
                     </div>
                   ))}
                 </div>
-                <div className="flex">
-                  <input
-                    type="text"
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    className="flex-grow border rounded-l px-4 py-2"
-                    placeholder="Type a message..."
-                  />
-                  <button onClick={sendMessage} className="bg-blue-500 text-white px-4 py-2 rounded-r">
-                    Send
-                  </button>
-                </div>
+                <input
+                  type="text"
+                  value={newMessage}
+                  onChange={(e) => setNewMessage(e.target.value)}
+                  onKeyDown={handleKeyPress}
+                  className="w-full border rounded px-4 py-2"
+                  placeholder="Type a message..."
+                />
+                <button
+                  onClick={sendMessage}
+                  className="mt-2 bg-green-500 text-white px-4 py-2 rounded w-full"
+                >
+                  Send
+                </button>
               </>
             )}
           </div>
