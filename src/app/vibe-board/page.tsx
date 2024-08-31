@@ -7,7 +7,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
+import WhatshotOutlinedIcon from '@mui/icons-material/WhatshotOutlined';
 
 import React from 'react'
 
@@ -79,7 +80,8 @@ const VibeBoard = () => {
         <TableCaption>Top vibers</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="text-center px-[10px]">viber</TableHead>
+            <TableHead className="text-center px-[10px]">
+            <WhatshotOutlinedIcon/>viber</TableHead>
             <TableHead className="text-center px-[10px]">user name</TableHead>
             <TableHead className="text-center px-[10px]">status</TableHead>
             <TableHead className="text-center px-[10px]">followers</TableHead>

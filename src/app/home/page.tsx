@@ -5,8 +5,8 @@ import FeedCard from './feed';
 const MainHomePage = () => {
   return (
     <div>
-      <DragDropUpload/>
-      {/* <FeedCard/> */}
+      {/* <DragDropUpload/> */}
+      <FeedCard/>
     </div>
   )
 }

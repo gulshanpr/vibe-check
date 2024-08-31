@@ -5,9 +5,10 @@ import {
     Card,
     CardContent,
     CardHeader,
-} from "@/components/ui/card"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSun, faFire } from '@fortawesome/free-solid-svg-icons'
+} from "@/components/ui/card";
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import WhatshotOutlinedIcon from '@mui/icons-material/WhatshotOutlined';
+
 
 
 const FeedCard = () => {
@@ -23,6 +24,14 @@ const FeedCard = () => {
         console.log(`You swiped ${direction} on card ${index + 1}`);
     };
 
+    function handleLightModeClick(index: number) {
+        console.log("LightMode icon clicked for item", index);
+    }
+
+    function handleWhatshotClick(index: number) {
+        console.log("Whatshot icon clicked for item", index);
+    }
+
     return (
         <div className="mt-28 flex justify-center">
             <div className="w-[550px] relative">
@@ -31,17 +40,24 @@ const FeedCard = () => {
                         key={index}
                         onSwipe={(direction) => handleSwipe(direction, index)}
                     >
-                        <Card className="w-full absolute">
-                            <CardHeader>
-                            </CardHeader>
-                            <CardContent>
+                        <Card className="w-full absolute pr-[60px]">
+                            <CardHeader></CardHeader>
+                            <CardContent className="flex items-center justify-between">
                                 <img
                                     src={`https://${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${hash}`}
                                     alt={`Image from IPFS hash ${hash}`}
                                 />
-                                <div className=''>
-                                    <FontAwesomeIcon icon={faSun} className='h-8' />
-                                    <FontAwesomeIcon icon={faFire} className='h-8' />
+                                <div className="ml-[20px] mt-[100px] flex flex-col space-y-2">
+                                    <div className='mb-[50px]'>
+                                        <LightModeOutlinedIcon sx={{ fontSize: 50 }}
+                                            onClick={() => handleLightModeClick(index)}
+                                        />
+                                    </div>
+                                    <div>
+                                        <WhatshotOutlinedIcon sx={{ fontSize: 50 }}
+                                            onClick={() => handleWhatshotClick(index)}
+                                        />
+                                    </div>
                                 </div>
                             </CardContent>
                         </Card>
@@ -49,6 +65,9 @@ const FeedCard = () => {
                 ))}
             </div>
         </div>
+
+
+
     );
 }
 
