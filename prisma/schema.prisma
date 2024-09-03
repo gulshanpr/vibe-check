@@ -15,6 +15,7 @@ model User {
   name              String?
   address           String    @unique
   userName          String    @unique
+  gyattLevel        String    @default("0")
   overAllAuraPoints String    @default("0")
   allVibes          String[]  @default([])
   posts             Post[]

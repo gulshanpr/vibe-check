@@ -7,13 +7,15 @@ const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
 
 const chainConfig = {
     chainNamespace: CHAIN_NAMESPACES.EIP155,
-    chainId: "0xaa36a7",
-    rpcTarget: "https://rpc.ankr.com/eth_sepolia",
-    displayName: "Ethereum Sepolia Testnet",
-    blockExplorerUrl: "https://sepolia.etherscan.io",
-    ticker: "ETH",
-    tickerName: "Ethereum",
-    logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
+    chainId: "0x66eee", // Hex of 421614
+    // Avoid using public rpcTarget in production.
+    // Use services like Infura, Quicknode etc
+    rpcTarget: process.env.NEXT_PUBLIC_RPC_URL || "",
+    displayName: "Arbitrum Sepolia Testnet",
+    blockExplorerUrl: "https://sepolia.arbiscan.io/",
+    ticker: "AETH",
+    tickerName: "AETH",
+    logo: "https://cryptologos.cc/logos/arbitrum-arb-logo.png",
 };
 
 const privateKeyProvider = new EthereumPrivateKeyProvider({
@@ -29,7 +31,7 @@ export const web3auth = new Web3Auth({
 export async function initializeWeb3Auth() {
     try {
         await web3auth.initModal();
-        if(web3auth.connected) {
+        if (web3auth.connected) {
             // localStorage.setItem('jwtToken', web3auth.authenticateUser());
             console.log('User authenticated');
         }
