@@ -8,7 +8,7 @@ const MainHomePage = () => {
   return (
     <div>
       {/* <DragDropUpload/> */}
-      {/* <FeedCard/> */}
+      <FeedCard/>
       <FileUpload/>
     </div>
   )
