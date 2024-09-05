@@ -2,8 +2,12 @@
 import React, { useState } from 'react'
 import TinderCard from 'react-tinder-card'
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import WhatshotOutlinedIcon from '@mui/icons-material/WhatshotOutlined';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import CustomSlider from './slider';
 
 
 
@@ -19,6 +23,7 @@ const FeedCard = () => {
 
     const [auraOpened, setAuraOpened] = useState(false);
     const [vibeOpened, setVibeOpened] = useState(false);
+    const [customVibe, setCustomVibe] = useState<boolean>(false);
 
     const handleSwipe = (direction: string, index: number) => {
         console.log(`You swiped ${direction} on card ${index + 1}`);
@@ -32,6 +37,23 @@ const FeedCard = () => {
     function handleWhatshotClick(index: number) {
         console.log("Whatshot icon clicked for item", index);
         setVibeOpened(prevState => !prevState);
+    }
+
+    const handleCustonVibe = () => {
+        console.log("Custom Vibe button clicked");
+        setCustomVibe(prevState => !prevState);
+    }
+
+    const handleCustomVibeButton = () => {
+        console.log("Custom Vibe button clicked");
+    }
+
+    const handleVibeSelect = (value: string) => {
+        console.log("Vibe selected", value);
+    }
+
+    const handleVibe = () => {
+        console.log("Vibe button clicked");
     }
 
     return (
@@ -67,29 +89,71 @@ const FeedCard = () => {
                 ))}
             </div>
 
-            <div className="ml-[20px] right-[-250px] top-0 space-y-[20px]">
-                {auraOpened && (
-                    <Card className="w-[200px]">
-                        <CardHeader>
-                            <p>Aura</p>
-                        </CardHeader>
-                        <CardContent>
-                            <p>Aura point</p>
-                        </CardContent>
-                    </Card>
-                )}
-                {vibeOpened && (
-                    <Card className="w-[200px]">
-                        <CardHeader>
-                            <p>Vibe</p>
-                        </CardHeader>
-                        <CardContent>
-                            <p>Vibe tag</p>
-                        </CardContent>
-                    </Card>
-                )}
+
+            <div className="ml-[20px] space-y-[20px] ">
+                <div>
+                    {auraOpened && (
+                        <Card className="flex flex-col justify-center items-center pr-[10px]">
+                            <CardHeader className="text-center">
+                                <p>Give aura 🥶</p>
+                            </CardHeader>
+                            <CardContent className="flex justify-center items-center">
+                                <div>
+                                    <CustomSlider min={-80} max={80} step={0.1} />
+                                </div>
+                            </CardContent>
+                        </Card>
+                    )}
+                </div>
+                <div className='flex'>
+                    {vibeOpened && (
+                        <Card className="flex flex-col justify-center items-center">
+                            <CardHeader className="text-center">
+                                <p>Give me vibe ❤️‍🔥</p>
+                            </CardHeader>
+                            <CardContent className="flex justify-center items-center">
+                                <div className="text-center">
+                                    <Select onValueChange={handleVibeSelect}>
+                                        <SelectTrigger className="">
+                                            <SelectValue placeholder="Theme" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="light">Light</SelectItem>
+                                            <SelectItem value="dark">Dark</SelectItem>
+                                            <SelectItem value="system">System</SelectItem>
+                                            <div className='mx-[32px]'>
+                                                <AddOutlinedIcon
+                                                    sx={{ fontSize: 20 }} onClick={
+                                                        () => handleCustonVibe()
+                                                    }
+                                                />
+                                            </div>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    )}
+
+                    <div className='mx-[20px]'>
+                        {customVibe && vibeOpened && (
+                            <div>
+                                <Card className="flex flex-col justify-center items-center">
+                                    <CardHeader className="text-center">
+                                        <p>Buy custom vibe</p>
+                                    </CardHeader>
+                                    <CardContent className="flex justify-center items-center">
+                                        <Button className="bg-black text-white" variant="outline" onClick={handleCustomVibeButton}>Buy Vibe-tag</Button>
+                                    </CardContent>
+                                </Card>
+                            </div>
+                        )}
+
+                    </div>
+                </div>
+
             </div>
-        </div>
+        </div >
     );
 }
 
