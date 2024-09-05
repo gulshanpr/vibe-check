@@ -62,13 +62,13 @@ export const FileUpload = ({
       setUploading(true);
       const data = new FormData();
       data.set("file", files);
-      // const uploadRequest = await fetch("/api/files", {
-      //   method: "POST",
-      //   body: data,
-      // });
-      // const uploadData = await uploadRequest.json();
-      // setCid(uploadData.IpfsHash);
-      // console.log(uploadData.IpfsHash);
+      const uploadRequest = await fetch("/api/files", {
+        method: "POST",
+        body: data,
+      });
+      const uploadData = await uploadRequest.json();
+      setCid(uploadData.IpfsHash);
+      console.log(uploadData.IpfsHash);
       setUploading(false);
       setUploaded(true);
     } catch (e) {

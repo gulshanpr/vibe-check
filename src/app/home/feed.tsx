@@ -1,11 +1,7 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import TinderCard from 'react-tinder-card'
-import {
-    Card,
-    CardContent,
-    CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import WhatshotOutlinedIcon from '@mui/icons-material/WhatshotOutlined';
 
@@ -18,7 +14,11 @@ const FeedCard = () => {
         "bafybeiackjb3p756alfnd2545itaua36yn7qc4i2wnfuddtqorlxnlqkgm",
         "bafybeih24jxktqxb5dybh6mdeawv2cig6lx6skrz2ggbeleemgm6ompswi",
         "bafybeigwzwscmua7wxgat6zwgc25xxnhqwfk7rjixnelsxx52dvf4ljz2a",
+        "bafybeibu5dqeev4es72rchsrxi4fzblmyfsduywmlzyfvhgaqpi3orti5e",
     ];
+
+    const [auraOpened, setAuraOpened] = useState(false);
+    const [vibeOpened, setVibeOpened] = useState(false);
 
     const handleSwipe = (direction: string, index: number) => {
         console.log(`You swiped ${direction} on card ${index + 1}`);
@@ -26,14 +26,16 @@ const FeedCard = () => {
 
     function handleLightModeClick(index: number) {
         console.log("LightMode icon clicked for item", index);
+        setAuraOpened(prevState => !prevState);
     }
 
     function handleWhatshotClick(index: number) {
         console.log("Whatshot icon clicked for item", index);
+        setVibeOpened(prevState => !prevState);
     }
 
     return (
-        <div className="mt-28 flex justify-center">
+        <div className="mt-28 flex justify-center relative">
             <div className="w-[550px] relative">
                 {ipfsHashes.map((hash, index) => (
                     <TinderCard
@@ -64,11 +66,32 @@ const FeedCard = () => {
                     </TinderCard>
                 ))}
             </div>
+
+            <div className="ml-[20px] right-[-250px] top-0 space-y-[20px]">
+                {auraOpened && (
+                    <Card className="w-[200px]">
+                        <CardHeader>
+                            <p>Aura</p>
+                        </CardHeader>
+                        <CardContent>
+                            <p>Aura point</p>
+                        </CardContent>
+                    </Card>
+                )}
+                {vibeOpened && (
+                    <Card className="w-[200px]">
+                        <CardHeader>
+                            <p>Vibe</p>
+                        </CardHeader>
+                        <CardContent>
+                            <p>Vibe tag</p>
+                        </CardContent>
+                    </Card>
+                )}
+            </div>
         </div>
-
-
-
     );
 }
+
 
 export default FeedCard;
