@@ -7,7 +7,9 @@ import { Button } from "@/components/ui/button";
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import WhatshotOutlinedIcon from '@mui/icons-material/WhatshotOutlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import CustomSlider from './slider';
+import { FileUpload } from '@/components/ui/file-upload';
 
 
 
@@ -24,6 +26,12 @@ const FeedCard = () => {
     const [auraOpened, setAuraOpened] = useState(false);
     const [vibeOpened, setVibeOpened] = useState(false);
     const [customVibe, setCustomVibe] = useState<boolean>(false);
+    const [isUploadToggle, setIsUploadToggle] = useState(false);
+
+    const handleUploadToggle = () => {
+        console.log("Upload button clicked");
+        setIsUploadToggle(prevState => !prevState);
+    }
 
     const handleSwipe = (direction: string, index: number) => {
         console.log(`You swiped ${direction} on card ${index + 1}`);
@@ -58,36 +66,58 @@ const FeedCard = () => {
 
     return (
         <div className="mt-28 flex justify-center relative">
+            <div className='flex'>
+                {isUploadToggle && (
+                    <div className=" top-[50px] right-[50px]">
+                        <div className="bg-white p-[20px]">
+                            <FileUpload />
+                        </div>
+                    </div>
+                )}
+            </div>
             <div className="w-[550px] relative">
                 {ipfsHashes.map((hash, index) => (
-                    <TinderCard
-                        key={index}
-                        onSwipe={(direction) => handleSwipe(direction, index)}
-                    >
-                        <Card className="w-full absolute pr-[60px]">
-                            <CardHeader></CardHeader>
-                            <CardContent className="flex items-center justify-between">
-                                <img
-                                    src={`https://${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${hash}`}
-                                    alt={`Image from IPFS hash ${hash}`}
-                                />
-                                <div className="ml-[20px] mt-[100px] flex flex-col space-y-2">
-                                    <div className='mb-[50px]'>
-                                        <LightModeOutlinedIcon sx={{ fontSize: 50 }}
-                                            onClick={() => handleLightModeClick(index)}
-                                        />
+                    <div>
+                        <TinderCard
+                            key={index}
+                            onSwipe={(direction) => handleSwipe(direction, index)}
+                        >
+                            <Card className="w-full absolute pr-[60px]">
+                                <CardHeader></CardHeader>
+                                <CardContent className="flex items-center justify-between">
+                                    <img
+                                        src={`https://${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${hash}`}
+                                        alt={`Image from IPFS hash ${hash}`}
+                                    />
+                                    <div className="mt-[100px] ml-[20px] space-y-[20px]">
+                                        <div className=''>
+                                            <LightModeOutlinedIcon sx={{ fontSize: 50 }}
+                                                onClick={() => handleLightModeClick(index)}
+                                            />
+                                        </div>
+                                        <div className=''>
+                                            <WhatshotOutlinedIcon sx={{ fontSize: 50 }}
+                                                onClick={() => handleWhatshotClick(index)}
+                                            />
+                                        </div>
+                                        <div className=''>
+                                            <AddBoxOutlinedIcon
+                                                sx={{ fontSize: 50 }}
+                                                onClick={() => handleUploadToggle()
+                                                }
+                                            />
+                                        </div>
                                     </div>
-                                    <div>
-                                        <WhatshotOutlinedIcon sx={{ fontSize: 50 }}
-                                            onClick={() => handleWhatshotClick(index)}
-                                        />
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </TinderCard>
+                                </CardContent>
+                            </Card>
+                        </TinderCard>
+
+                    </div>
                 ))}
+
             </div>
+
+
 
 
             <div className="ml-[20px] space-y-[20px] ">
