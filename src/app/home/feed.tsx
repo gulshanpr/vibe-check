@@ -9,11 +9,12 @@ import WhatshotOutlinedIcon from '@mui/icons-material/WhatshotOutlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import CustomSlider from './slider';
-import { FileUpload } from '@/components/ui/file-upload';
+import { useRouter } from 'next/navigation';
 
 
 
 const FeedCard = () => {
+    const router = useRouter();
     const ipfsHashes = [
         "bafkreidgvzaybua26xwudyztqusbifzol5vmsjcybfv7xc3jksvyoewgnq",
         "bafybeihbep3mmcevogtrhk3ionk4cx4lfdzrax5l6ifgj4l4wfdiph2baa",
@@ -26,11 +27,11 @@ const FeedCard = () => {
     const [auraOpened, setAuraOpened] = useState(false);
     const [vibeOpened, setVibeOpened] = useState(false);
     const [customVibe, setCustomVibe] = useState<boolean>(false);
-    const [isUploadToggle, setIsUploadToggle] = useState(false);
 
     const handleUploadToggle = () => {
         console.log("Upload button clicked");
-        setIsUploadToggle(prevState => !prevState);
+        router.push('/upload');
+
     }
 
     const handleSwipe = (direction: string, index: number) => {
@@ -54,6 +55,7 @@ const FeedCard = () => {
 
     const handleCustomVibeButton = () => {
         console.log("Custom Vibe button clicked");
+        router.push('vibe-place')
     }
 
     const handleVibeSelect = (value: string) => {
@@ -66,15 +68,6 @@ const FeedCard = () => {
 
     return (
         <div className="mt-28 space-x-[20px] flex justify-center relative">
-            <div className='flex'>
-                {isUploadToggle && (
-                    <div className=" top-[50px] right-[50px]">
-                        <div className="bg-white">
-                            <FileUpload />
-                        </div>
-                    </div>
-                )}
-            </div>
             <div className="w-[550px] relative">
                 {ipfsHashes.map((hash, index) => (
                     <div>

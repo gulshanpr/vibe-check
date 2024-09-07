@@ -3,7 +3,6 @@ import {
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -63,14 +62,6 @@ const socialMediaUsers = [
     url: "https://lh3.googleusercontent.com/a/ACg8ocItYJ5QOoCQ0afbiogJxptMR5ZEMz_QqJBIAjt0AwuWxG9xnQ=s96-c",
   },
 ];
-
-const avatar = [
-  {
-
-    title: "Gulshan Kumar",
-    subtitle: "student",
-  }
-]
 
 
 const VibeBoard = () => {
