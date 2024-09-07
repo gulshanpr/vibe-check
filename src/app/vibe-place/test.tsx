@@ -1,75 +1,3 @@
-// 'use client';
-// import { initializeWeb3Auth, web3auth } from '@/utils/web3auth';
-// import { IProvider } from '@web3auth/base';
-// import { ethers } from 'ethers';
-// import React, { useEffect } from 'react'
-
-// const Testing = () => {
-
-//   const amount = '0.001';
-//   const recipient = "0xAEDb4Aa3aa52953864b3e0813087E332F1Dcee3B"
-
-//   useEffect(() => {
-//     initializeWeb3Auth();
-//   }, []);
-
-//   const handleTest = async () => {
-//     // const provider = process.env.NEXT_PUBLIC_RPC_URL;
-//     try {
-//       if (web3auth.connected) {
-//         console.log('Connected');
-//         const provider = new ethers.providers.Web3Provider(web3auth.provider as IProvider);
-//         const signer = provider.getSigner();
-//         const destination = "0x7aFac68875d2841dc16F1730Fba43974060b907A";
-//         const amount = ethers.utils.parseEther("0.001"); // Convert 1 ether to wei
-
-//         // Submit transaction to the blockchain
-//         const tx = await signer.sendTransaction({
-//           to: destination,
-//           value: amount,
-//         });
-
-//         // Wait for the transaction to be mined
-//         const receipt = await tx.wait();
-//         console.log('Receipt:', receipt);
-//         console.log("Transaction mined! Block:", receipt.blockNumber);
-
-
-//         try {
-//           // Send the transaction
-//           // console.log('Address:', address);
-
-//           // const transactionResponse = await signer.sendTransaction(tx);
-//           // console.log('Address:', address);
-
-//           // console.log("Transaction sent! Hash:", transactionResponse.hash);
-//           // console.log('Address:', address);
-
-
-//           // // Wait for the transaction to be mined
-//           // await transactionResponse.wait();
-//           console.log("Transaction mined!");
-//         } catch (error) {
-//           console.error("Transaction failed:", error);
-//         }
-
-//       }
-//     } catch (error) {
-//       console.log('Error connecting wallet:', error);
-//     }
-//   }
-
-//   return (
-//     <div className='h-screen w-screen flex justify-center'>
-//       <button onClick={handleTest}>
-//         Testing
-//       </button>
-//     </div>
-//   )
-// }
-
-// export default Testing
-
 'use client';
 import { initializeWeb3Auth, web3auth } from '@/utils/web3auth';
 import { IProvider } from '@web3auth/base';
@@ -112,6 +40,11 @@ const Testing = () => {
       const address = await signer.getAddress();
       console.log('Address:', address);
       console.log('Sending transaction...');
+      const network = await provider.getNetwork();
+
+      console.log(network.name);
+      console.log(network.chainId);
+      console.log(network.ensAddress);
       const tx = await signer.sendTransaction({
         to: destination,
         value: amount,

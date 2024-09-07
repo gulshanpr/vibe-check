@@ -65,11 +65,11 @@ const FeedCard = () => {
     }
 
     return (
-        <div className="mt-28 flex justify-center relative">
+        <div className="mt-28 space-x-[20px] flex justify-center relative">
             <div className='flex'>
                 {isUploadToggle && (
                     <div className=" top-[50px] right-[50px]">
-                        <div className="bg-white p-[20px]">
+                        <div className="bg-white">
                             <FileUpload />
                         </div>
                     </div>

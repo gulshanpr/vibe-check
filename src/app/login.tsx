@@ -68,56 +68,58 @@ export const Login = () => {
   };
 
   const handleGoToApp = async () => {
-    try {
-      const userInfo = await web3auth.getUserInfo();
-      const veriferId = userInfo.verifierId;
-      const response = await fetch('/api/check', {
-        method: 'POST',
-        body: JSON.stringify({ veriferId }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+    router.push('/home');
+    
+    // try {
+    //   const userInfo = await web3auth.getUserInfo();
+    //   const veriferId = userInfo.verifierId;
+    //   const response = await fetch('/api/check', {
+    //     method: 'POST',
+    //     body: JSON.stringify({ veriferId }),
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //   });
 
-      const responsee = await response.json();
-      if (!response.ok) {
-        throw new Error('Network response was not ok from client', responsee.message);
-      }
+    //   const responsee = await response.json();
+    //   if (!response.ok) {
+    //     throw new Error('Network response was not ok from client', responsee.message);
+    //   }
 
-      if (responsee.data === null) { // if null then user does not exist in db
+    //   if (responsee.data === null) {
 
-        try {
-          const userDeatils = {
-            veriferId: veriferId,
-            email: userInfo.email,
-            name: userInfo.name
-          };
+    //     try {
+    //       const userDeatils = {
+    //         veriferId: veriferId,
+    //         email: userInfo.email,
+    //         name: userInfo.name
+    //       };
 
-          const response = await fetch('/api/create', {
-            method: 'POST',
-            body: JSON.stringify(userDeatils),
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          });
+    //       const response = await fetch('/api/create', {
+    //         method: 'POST',
+    //         body: JSON.stringify(userDeatils),
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //         },
+    //       });
 
 
-          const responsee = await response.json();
+    //       const responsee = await response.json();
 
-          if (!response.ok) {
-            throw new Error('Network response was not ok from client', responsee.message);
-          }
-        } catch (error) {
-          console.error('Failed to create product:', error);
-        }
-      }
-      if(responsee.data !== null){
-        router.push('/home');
-      }
+    //       if (!response.ok) {
+    //         throw new Error('Network response was not ok from client', responsee.message);
+    //       }
+    //     } catch (error) {
+    //       console.error('Failed to create product:', error);
+    //     }
+    //   }
+    //   if(responsee.data !== null){
+    //     router.push('/home');
+    //   }
 
-    } catch (error) {
-      console.error('Failed to handle GoToApp:', error);
-    }
+    // } catch (error) {
+    //   console.error('Failed to handle GoToApp:', error);
+    // }
 
 
   };
@@ -162,7 +164,7 @@ export const Login = () => {
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         onClick={login}
       >
-        Login
+        Check your vibe
       </button>
     </div>
   );

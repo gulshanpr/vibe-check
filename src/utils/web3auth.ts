@@ -7,16 +7,27 @@ const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
 
 const chainConfig = {
     chainNamespace: CHAIN_NAMESPACES.EIP155,
-    chainId: "0x66eee", // Hex of 421614
-    // Avoid using public rpcTarget in production.
-    // Use services like Infura, Quicknode etc
-    rpcTarget: process.env.NEXT_PUBLIC_RPC_URL || "",
+    chainId: "0x66eee",
+    rpcTarget: process.env.NEXT_PUBLIC_ARB_SEPOLIA_RPC_URL || '',
     displayName: "Arbitrum Sepolia Testnet",
     blockExplorerUrl: "https://sepolia.arbiscan.io/",
     ticker: "AETH",
     tickerName: "AETH",
     logo: "https://cryptologos.cc/logos/arbitrum-arb-logo.png",
 };
+
+// ETH sepolia congi
+// const chainConfig = {
+//     chainNamespace: CHAIN_NAMESPACES.EIP155,
+//     chainId: "0xaa36a7",
+//     rpcTarget: process.env.NEXT_PUBLIC_ETH_SEPOLIA_RPC_URL || '',
+//     displayName: "Ethereum Sepolia Testnet",
+//     blockExplorerUrl: "https://sepolia.etherscan.io",
+//     ticker: "ETH",
+//     tickerName: "Ethereum",
+//     logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
+// };
+
 
 const privateKeyProvider = new EthereumPrivateKeyProvider({
     config: { chainConfig },
