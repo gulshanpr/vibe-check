@@ -141,9 +141,13 @@ const FeedCard = () => {
                                             <SelectValue placeholder="Theme" />
                                         </SelectTrigger>
                                         <SelectContent>
-                                            <SelectItem value="light">Light</SelectItem>
-                                            <SelectItem value="dark">Dark</SelectItem>
-                                            <SelectItem value="system">System</SelectItem>
+                                            <SelectItem value="light">Hot🥵🥵</SelectItem>
+                                            <SelectItem value="dark">Cool😎😎</SelectItem>
+                                            <SelectItem value="system">Eww🤮🤮</SelectItem>
+                                            <SelectItem value="system">Badie🤤🤤</SelectItem>
+                                            <SelectItem value="system">Cute🥺🥺</SelectItem>
+                                            <SelectItem value="system">Sexy🔥🔥</SelectItem>
+                                            <SelectItem value="system">Uncle🥸🥸</SelectItem>
                                             <div className='mx-[32px]'>
                                                 <AddOutlinedIcon
                                                     sx={{ fontSize: 20 }} onClick={

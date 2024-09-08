@@ -105,6 +105,10 @@ const XMTPChat = () => {
     }
   };
 
+  const truncateAddress = (address: string) => {
+    return `${address.slice(0, 6)}...${address.slice(-4)}`;
+  };
+
   const listenForNewConversations = async () => {
     try {
       if (clientRef.current) {
@@ -203,9 +207,10 @@ const XMTPChat = () => {
                   conversationRef.current = conv;
                 }}
               >
-                {conv.peerAddress}
+                {truncateAddress(conv.peerAddress)}
               </div>
             ))}
+
             <div className="mt-4">
               <input
                 type="text"

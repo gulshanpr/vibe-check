@@ -142,12 +142,12 @@ export const Login = () => {
         >
           Go to App
         </button>
-        <button
+        {/* <button
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
           onClick={handleGetUserInfo}
         >
           Get Details
-        </button>
+        </button> */}
         <button
           className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
           onClick={logout}

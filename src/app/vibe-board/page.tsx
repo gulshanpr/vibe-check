@@ -13,55 +13,50 @@ import React from 'react'
 
 const socialMediaUsers = [
   {
-    username: "user001",
-    accountStatus: "Active",
-    followersCount: 1500,
-    accountType: "Personal",
+    username: "Alice Johnson",
     url: "https://lh3.googleusercontent.com/a/ACg8ocItYJ5QOoCQ0afbiogJxptMR5ZEMz_QqJBIAjt0AwuWxG9xnQ=s96-c",
+    auraPoint: 85,
+    vibeTagsCount: 12,
   },
   {
-    username: "user002",
-    accountStatus: "Inactive",
-    followersCount: 300,
-    accountType: "Business",
+    username: "Bob Smith",
     url: "https://lh3.googleusercontent.com/a/ACg8ocItYJ5QOoCQ0afbiogJxptMR5ZEMz_QqJBIAjt0AwuWxG9xnQ=s96-c",
+    auraPoint: 40,
+    vibeTagsCount: 5,
   },
   {
-    username: "user003",
-    accountStatus: "Active",
-    followersCount: 2500,
-    accountType: "Personal",
+    username: "Charlie Davis",
     url: "https://lh3.googleusercontent.com/a/ACg8ocItYJ5QOoCQ0afbiogJxptMR5ZEMz_QqJBIAjt0AwuWxG9xnQ=s96-c",
+    auraPoint: 90,
+    vibeTagsCount: 20,
   },
   {
-    username: "user004",
-    accountStatus: "Suspended",
-    followersCount: 800,
-    accountType: "Business",
+    username: "Dana Lee",
     url: "https://lh3.googleusercontent.com/a/ACg8ocItYJ5QOoCQ0afbiogJxptMR5ZEMz_QqJBIAjt0AwuWxG9xnQ=s96-c",
+    auraPoint: 30,
+    vibeTagsCount: 8,
   },
   {
-    username: "user005",
-    accountStatus: "Active",
-    followersCount: 1200,
-    accountType: "Personal",
+    username: "Eva Green",
     url: "https://lh3.googleusercontent.com/a/ACg8ocItYJ5QOoCQ0afbiogJxptMR5ZEMz_QqJBIAjt0AwuWxG9xnQ=s96-c",
+    auraPoint: 75,
+    vibeTagsCount: 15,
   },
   {
-    username: "user006",
-    accountStatus: "Inactive",
-    followersCount: 450,
-    accountType: "Business",
+    username: "Frank Moore",
     url: "https://lh3.googleusercontent.com/a/ACg8ocItYJ5QOoCQ0afbiogJxptMR5ZEMz_QqJBIAjt0AwuWxG9xnQ=s96-c",
+    auraPoint: 50,
+    vibeTagsCount: 7,
   },
   {
-    username: "user007",
-    accountStatus: "Active",
-    followersCount: 3200,
-    accountType: "Personal",
+    username: "Grace Wilson",
     url: "https://lh3.googleusercontent.com/a/ACg8ocItYJ5QOoCQ0afbiogJxptMR5ZEMz_QqJBIAjt0AwuWxG9xnQ=s96-c",
+    auraPoint: 95,
+    vibeTagsCount: 25,
   },
 ];
+
+
 
 
 const VibeBoard = () => {
@@ -74,9 +69,8 @@ const VibeBoard = () => {
             <TableHead className="text-center px-[10px]">
             <WhatshotOutlinedIcon/>viber</TableHead>
             <TableHead className="text-center px-[10px]">user name</TableHead>
-            <TableHead className="text-center px-[10px]">status</TableHead>
-            <TableHead className="text-center px-[10px]">followers</TableHead>
-            <TableHead className="text-center px-[10px]">account type</TableHead>
+            <TableHead className="text-center px-[10px]">Total Aura</TableHead>
+            <TableHead className="text-center px-[10px]">Vibe tag count</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -91,9 +85,8 @@ const VibeBoard = () => {
                 <p>{invoice.username}</p>
               </TableCell>
               <TableCell className="text-center font-medium px-[10px]">{invoice.username}</TableCell>
-              <TableCell className="text-center px-[10px]">{invoice.accountStatus}</TableCell>
-              <TableCell className="text-center px-[10px]">{invoice.followersCount}</TableCell>
-              <TableCell className="text-center px-[10px]">{invoice.accountType}</TableCell>
+              <TableCell className="text-center px-[10px]">{invoice.auraPoint}</TableCell>
+              <TableCell className="text-center px-[10px]">{invoice.vibeTagsCount}</TableCell>
             </TableRow>
           ))}
         </TableBody>

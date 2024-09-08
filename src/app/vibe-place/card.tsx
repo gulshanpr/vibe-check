@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react';
 import { NeonGradientCard } from "@/components/magicui/neon-gradient-card";
 import { AnimatedSubscribeButton } from "@/components/magicui/animated-subscribe-button";
 import Image from 'next/image';
@@ -8,189 +9,160 @@ import { yellow } from '@mui/material/colors';
 import {
     Card,
     CardContent,
-    CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
+
+// Import the external function and web3auth utilities
+import { handleTest } from '@/utils/web3authTransaction';
+import { initializeWeb3Auth, web3auth } from '@/utils/web3auth';
 
 const Components = () => {
+    const [isInitialized, setIsInitialized] = useState(false);
+
+    // Initialize Web3Auth when the component mounts
+    useEffect(() => {
+        const initWeb3Auth = async () => {
+            try {
+                await initializeWeb3Auth();
+                setIsInitialized(true);
+            } catch (error) {
+                console.error('Error initializing Web3Auth:', error);
+            }
+        };
+
+        initWeb3Auth();
+    }, []);
+
+    // Updated onBuy function that uses web3auth and isInitialized
+    const onBuy = async (item: string) => {
+        try {
+            // Call the handleTest utility with web3auth and isInitialized
+            await handleTest(web3auth, isInitialized);
+            console.log(`Transaction initiated for ${item}`);
+        } catch (error) {
+            console.error(`Error buying ${item}:`, error);
+        }
+    };
+
     return (
-        <div className='flex space-x-4'>
-            <div>
-                <NeonGradientCard className="max-w-sm items-center justify-center text-center">
-                    <div className='flex justify-center'>
-                        <span className="pointer-events-none z-10 h-full whitespace-pre-wrap bg-gradient-to-br from-[#ff2975] from-35% to-[#00FFF1] bg-clip-text text-center text-6xl font-bold leading-none tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
+        <div className='ml-[200px] flex space-x-10'>
+            {/* First Card */}
+            <div className=''>
+                <Card className="w-[200px] h-[300px] items-center justify-center text-center">
+                    <CardContent>
+                        <div className='flex justify-center mt-[50px]'>
                             <Image src="/images/image.png" alt="dogo" width={100} height={100} />
-                        </span>
-                    </div>
-                    <div className='flex justify-center'>
-                        <AnimatedSubscribeButton
-                            buttonColor="#000000"
-                            buttonTextColor="#ffffff"
-                            subscribeStatus={false}
-                            initialText={
-                                <span className="group inline-flex items-center">
-                                    buy
-                                </span>
-                            }
-                            changeText={
-                                <span className="group inline-flex items-center">
-                                    brought
-                                </span>
-                            }
-                            pendingText={
-                                <span className="group inline-flex items-center">
-                                    buying...
-                                </span>
-                            }
-                        />
-                    </div>
-
-                </NeonGradientCard>
+                        </div>
+                        <div className='flex justify-center'>
+                            <AnimatedSubscribeButton
+                                buttonColor="#000000"
+                                buttonTextColor="#ffffff"
+                                subscribeStatus={false}
+                                initialText={<span className="group inline-flex items-center">buy</span>}
+                                changeText={<span className="group inline-flex items-center">bought</span>}
+                                pendingText={<span className="group inline-flex items-center">buying...</span>}
+                                // Call the onBuy function here
+                                onClick={() => onBuy('dogo image')}
+                            />
+                        </div>
+                    </CardContent>
+                </Card>
             </div>
-            <div>
 
-            </div>
+            {/* Additional Cards */}
             <div>
-                <NeonGradientCard className="max-w-sm items-center justify-center text-center">
-                    <div className="text-2xl font-semibold leading-none tracking-tight ">
-                        <p>Buy Aura Point</p>
-                    </div>
-                    <LightModeOutlinedIcon sx={{ fontSize: 90, color: yellow[500] }} />
+                <Card className="w-[200px] h-[300px] items-center justify-center text-center">
 
-                    {/* <span className="pointer-events-none z-10 h-full whitespace-pre-wrap bg-gradient-to-br from-[#ff2975] from-35% to-[#00FFF1] bg-clip-text text-center text-6xl font-bold leading-none tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
-                Buy Aura Point
-              </span> */}
-                    <div className='flex justify-center'>
-                        <AnimatedSubscribeButton
-                            buttonColor="#000000"
-                            buttonTextColor="#ffffff"
-                            subscribeStatus={false}
-                            initialText={
-                                <span className="group inline-flex items-center">
-                                    buy
-                                </span>
-                            }
-                            changeText={
-                                <span className="group inline-flex items-center">
-                                    brought
-                                </span>
-                            }
-                            pendingText={
-                                <span className="group inline-flex items-center">
-                                    buying...
-                                </span>
-                            }
-                        />
-                    </div>
-                </NeonGradientCard>
-            </div>
-            <div>
-                <NeonGradientCard className="max-w-sm items-center justify-center text-center">
-                    <div className="text-2xl font-semibold leading-none tracking-tight ">
-                        <p>Swap/trade Aura Point</p>
-                    </div>
-                    <WhatshotOutlinedIcon sx={{ fontSize: 90, color: yellow[500] }} />
-
-                    {/* <span className="pointer-events-none z-10 h-full whitespace-pre-wrap bg-gradient-to-br from-[#ff2975] from-35% to-[#00FFF1] bg-clip-text text-center text-6xl font-bold leading-none tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
-                Swap/trade Aura Point
-    
-              </span> */}
-                    <div className='flex justify-center'>
-                        <AnimatedSubscribeButton
-                            buttonColor="#000000"
-                            buttonTextColor="#ffffff"
-                            subscribeStatus={false}
-                            initialText={
-                                <span className="group inline-flex items-center">
-                                    buy
-                                </span>
-                            }
-                            changeText={
-                                <span className="group inline-flex items-center">
-                                    brought
-                                </span>
-                            }
-                            pendingText={
-                                <span className="group inline-flex items-center">
-                                    buying...
-                                </span>
-                            }
-                        />
-                    </div>
-
-                </NeonGradientCard>
-            </div>
-            <div>
-                <NeonGradientCard className="max-w-sm items-center justify-center text-center">
-                    {/* <span className="pointer-events-none z-10 h-full whitespace-pre-wrap bg-gradient-to-br from-[#ff2975] from-35% to-[#00FFF1] bg-clip-text text-center text-6xl font-bold leading-none tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
-                Buy Custom Vibe-tags
-              </span> */}
-                    <div className='flex justify-center'>
-                        <AnimatedSubscribeButton
-                            buttonColor="#000000"
-                            buttonTextColor="#ffffff"
-                            subscribeStatus={false}
-                            initialText={
-                                <span className="group inline-flex items-center">
-                                    buy
-                                </span>
-                            }
-                            changeText={
-                                <span className="group inline-flex items-center">
-                                    brought
-                                </span>
-                            }
-                            pendingText={
-                                <span className="group inline-flex items-center">
-                                    buying...
-                                </span>
-                            }
-                        />
-                    </div>
-                </NeonGradientCard>
+                    <CardHeader>
+                        <CardTitle>Buy Aura Point</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <LightModeOutlinedIcon sx={{ fontSize: 90, color: yellow[500] }} />
+                        <div className='flex justify-center'>
+                            <AnimatedSubscribeButton
+                                buttonColor="#000000"
+                                buttonTextColor="#ffffff"
+                                subscribeStatus={false}
+                                initialText={<span className="group inline-flex items-center">buy</span>}
+                                changeText={<span className="group inline-flex items-center">bought</span>}
+                                pendingText={<span className="group inline-flex items-center">buying...</span>}
+                                onClick={() => onBuy('Aura Point')}
+                            />
+                        </div>
+                    </CardContent>
+                </Card>
             </div>
 
             <div>
-                <NeonGradientCard className="max-w-sm items-center justify-center text-center">
-                    <div className="text-2xl font-semibold leading-none tracking-tight ">
-                        <p>do something</p>
-                    </div>
+                <Card className="w-[200px] h-[300px] items-center justify-center text-center">
 
-                    <WhatshotOutlinedIcon sx={{ fontSize: 90, color: yellow[500] }} />
-
-                    {/* <span className="pointer-events-none z-10 h-full whitespace-pre-wrap bg-gradient-to-br from-[#ff2975] from-35% to-[#00FFF1] bg-clip-text text-center text-6xl font-bold leading-none tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
-                Swap/trade Aura Point
-    
-              </span> */}
-                    <div className='flex justify-center'>
-                        <AnimatedSubscribeButton
-                            buttonColor="#000000"
-                            buttonTextColor="#ffffff"
-                            subscribeStatus={false}
-                            initialText={
-                                <span className="group inline-flex items-center">
-                                    buy
-                                </span>
-                            }
-                            changeText={
-                                <span className="group inline-flex items-center">
-                                    brought
-                                </span>
-                            }
-                            pendingText={
-                                <span className="group inline-flex items-center">
-                                    buying...
-                                </span>
-                            }
-                        />
-                    </div>
-
-                </NeonGradientCard>
+                    <CardHeader>
+                        <CardTitle>Swap/Trade Aura Point</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <WhatshotOutlinedIcon sx={{ fontSize: 90, color: yellow[500] }} />
+                        <div className='flex justify-center'>
+                            <AnimatedSubscribeButton
+                                buttonColor="#000000"
+                                buttonTextColor="#ffffff"
+                                subscribeStatus={false}
+                                initialText={<span className="group inline-flex items-center">buy</span>}
+                                changeText={<span className="group inline-flex items-center">bought</span>}
+                                pendingText={<span className="group inline-flex items-center">buying...</span>}
+                                onClick={() => onBuy('Swap Aura Point')}
+                            />
+                        </div>
+                    </CardContent>
+                </Card>
             </div>
+
+            <div>
+                <Card className="w-[200px] h-[300px] items-center justify-center text-center">
+                    <CardHeader>
+                        <div className='mt-[40px]'>
+                            <CardTitle>Buy Custom Vibe-tags</CardTitle>
+                        </div>
+                    </CardHeader>
+                    <CardContent>
+                        <div className='flex justify-center'>
+                            <AnimatedSubscribeButton
+                                buttonColor="#000000"
+                                buttonTextColor="#ffffff"
+                                subscribeStatus={false}
+                                initialText={<span className="group inline-flex items-center">buy</span>}
+                                changeText={<span className="group inline-flex items-center">bought</span>}
+                                pendingText={<span className="group inline-flex items-center">buying...</span>}
+                                onClick={() => onBuy('Custom Vibe-tags')}
+                            />
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
+
+            {/* <div>
+                <Card className="w-[200px] h-[300px] items-center justify-center text-center">
+                    <CardHeader>
+                        <CardTitle>Do Something</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <WhatshotOutlinedIcon sx={{ fontSize: 90, color: yellow[500] }} />
+                        <div className='flex justify-center'>
+                            <AnimatedSubscribeButton
+                                buttonColor="#000000"
+                                buttonTextColor="#ffffff"
+                                subscribeStatus={false}
+                                initialText={<span className="group inline-flex items-center">buy</span>}
+                                changeText={<span className="group inline-flex items-center">bought</span>}
+                                pendingText={<span className="group inline-flex items-center">buying...</span>}
+                                onClick={() => onBuy('Something')}
+                            />
+                        </div>
+                    </CardContent>
+                </Card>
+            </div> */}
         </div>
-    )
-}
+    );
+};
 
 export default Components;
